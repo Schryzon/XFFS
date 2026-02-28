@@ -1,10 +1,8 @@
 # XFFS — 西莱宗-复芯文件系统
 ## Xīláizōng Fùxīn Wénjiàn Xìtǒng
 
-# XFFS — 西莱宗-复芯文件系统
-
 <p align="center">
-  <img src="assets/xffs_logo.png" width="420" alt="XFFS logo">
+  <img src="assets/xffs_logo.jpeg" width="420" alt="XFFS logo">
 </p>
 
 **XFFS (Xilaizong-Fuxin File System)** is a teaching-oriented user-space filesystem written in C++17.
