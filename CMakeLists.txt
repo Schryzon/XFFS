@@ -9,6 +9,7 @@ add_executable(mkxffs
     src/main.cpp
     src/disk.cpp
     src/format.cpp
+    src/allocator.cpp
 )
 
 target_include_directories(mkxffs PRIVATE include)

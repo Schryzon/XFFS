@@ -9,7 +9,25 @@ disk::~disk() {
 }
 
 bool disk::open(const std::string &path) {
-    file_.open(path, std::ios::in | std::ios::out | std::ios::binary);
+    file_.open(path,
+        std::ios::in |
+        std::ios::out |
+        std::ios::binary);
+
+    if(!file_.is_open()) {
+        // try create
+        file_.clear();
+        file_.open(path,
+            std::ios::out |
+            std::ios::binary);
+        file_.close();
+
+        file_.open(path,
+            std::ios::in |
+            std::ios::out |
+            std::ios::binary);
+    }
+
     return file_.is_open();
 }
 
