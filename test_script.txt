@@ -1,0 +1,9 @@
+mkdir /test
+touch /test/hello.txt
+write /test/hello.txt Hello World!
+ls -la /test
+cat /test/hello.txt
+stat /test/hello.txt
+rm -r /test
+ls /
+exit

@@ -27,8 +27,13 @@ This project focuses on demonstrating core filesystem concepts such as block man
 * ✔ Block bitmap initialization
 * ✔ Reserved block marking
 * ✔ Virtual disk formatter (`mkxffs`)
-
-> 🚧 File operations, directories, and allocator are work in progress.
+* ✔ Block allocator (`alloc_block` / `free_block`)
+* ✔ Inode I/O (`read_inode` / `write_inode`) with XOR checksums
+* ✔ Root inode creation on format
+* ✔ Directory entry operations (`dir_init` / `dir_add` / `dir_lookup`)
+* ✔ Path resolution (`/path/to/file`)
+* ✔ Subdirectory support (`dir_create`)
+* ✔ Interactive CLI Shell (`xffs_shell`)
 
 ---
 
@@ -155,22 +160,20 @@ xffs/
 * [x] Superblock
 * [x] Bitmap initialization
 
-### Phase 2
+### Phase 3: File Operations & Path Resolution
+* [x] Inode allocation/deallocation logic
+* [x] File lifecycle: create, read, write, delete
+* [x] Path resolution (absolute paths)
 
-* [ ] Block allocator
-* [ ] Root inode creation
-* [ ] Directory entries
+### Phase 4: Integrity & Shell
+* [x] Inode XOR Checksums
+* [x] Interactive REPL Shell (`xffs_shell`)
+* [x] Recursive directory deletion (`rm -r`)
 
-### Phase 3
-
-* [ ] File create/read/write/delete
-* [ ] Path resolution
-
-### Phase 4 (bonus)
-
-* [ ] Checksums
-* [ ] Snapshot support
-* [ ] WinFsp integration
+### Phase 5 (Future)
+* [ ] **Indirect Blocks**: Support files larger than 48 KB.
+* [ ] **WinFsp Integration**: Mount XFFS as a real drive on Windows!
+* [ ] **Multiblock Directories**: Support directories with more than 64 entries.
 
 ---
 

@@ -16,5 +16,16 @@ namespace xffs {
     /**
      * @brief Free a previously allocated block.
      */
-    bool free_disk(disk &dsk, const superblock &sb, uint64_t blk);
+    bool free_block(disk &dsk, const superblock &sb, uint64_t blk);
+
+    /**
+     * @brief Allocate a free inode from the inode table.
+     * @return inode index or UINT64_MAX on failure.
+     */
+    uint64_t alloc_inode(disk &dsk, const superblock &sb);
+
+    /**
+     * @brief Free an inode (mark as INODE_FREE).
+     */
+    bool free_inode(disk &dsk, const superblock &sb, uint64_t index);
 }

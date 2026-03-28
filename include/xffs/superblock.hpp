@@ -8,9 +8,12 @@
  * Stored at block 0, defines the filesystem layout.
  */
 
-namespace xffs{
+namespace xffs {
     constexpr uint32_t XFFS_MAGIC = 0x58464653; // "XFFS"
-    constexpr uint32_t XFFS_BLOCK_SIZE = 4096;
+    constexpr uint32_t XFFS_BLOCK_SIZE          = 4096;
+    constexpr uint64_t XFFS_DEFAULT_INODE_BLOCKS = 64;    // blocks reserved for inodes
+    constexpr uint64_t XFFS_DEFAULT_INODE_COUNT  = 1024;  // max inodes
+    constexpr uint64_t XFFS_DEFAULT_TOTAL_BLOCKS = 16384; // default image size in blocks
 
     #pragma pack(push, 1)
     struct superblock{

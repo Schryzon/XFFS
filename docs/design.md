@@ -10,4 +10,4 @@ Goals:
 - Inode-based layout
 - C++17 portable
 
-Status: skeleton phase
+Status: Phase 2 — inode I/O + directory entries

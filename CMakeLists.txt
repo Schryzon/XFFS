@@ -10,6 +10,38 @@ add_executable(mkxffs
     src/disk.cpp
     src/format.cpp
     src/allocator.cpp
+    src/inode_io.cpp
+    src/dir.cpp
+    src/file_ops.cpp
+    src/path.cpp
 )
 
 target_include_directories(mkxffs PRIVATE include)
+
+# --- Test executable ---
+add_executable(format_test
+    tests/format_test.cpp
+    src/disk.cpp
+    src/format.cpp
+    src/allocator.cpp
+    src/inode_io.cpp
+    src/dir.cpp
+    src/file_ops.cpp
+    src/path.cpp
+)
+
+target_include_directories(format_test PRIVATE include)
+
+# --- Shell executable ---
+add_executable(xffs_shell
+    src/shell.cpp
+    src/disk.cpp
+    src/format.cpp
+    src/allocator.cpp
+    src/inode_io.cpp
+    src/dir.cpp
+    src/file_ops.cpp
+    src/path.cpp
+)
+
+target_include_directories(xffs_shell PRIVATE include)

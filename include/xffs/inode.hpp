@@ -7,10 +7,14 @@ namespace xffs {
 /**
  * @brief Inode type identifiers.
  */
+constexpr uint16_t INODE_FREE = 0;
 constexpr uint16_t INODE_FILE = 1;
 constexpr uint16_t INODE_DIR  = 2;
 
-constexpr uint32_t XFFS_DIRECT_BLOCKS = 12;
+constexpr uint32_t XFFS_DIRECT_BLOCKS   = 12;
+constexpr uint32_t XFFS_INODE_SIZE      = 256;
+constexpr uint32_t XFFS_INODE_PAYLOAD   = 128; // Size of non-reserved fields
+constexpr uint32_t XFFS_INODE_RESERVED  = XFFS_INODE_SIZE - XFFS_INODE_PAYLOAD;
 
 /**
  * @brief On-disk inode (256 bytes).
@@ -32,7 +36,7 @@ struct inode {
 
     uint64_t checksum;
 
-    uint8_t reserved[256 - 128];
+    uint8_t reserved[XFFS_INODE_RESERVED];
 };
 #pragma pack(pop)
 
