@@ -10,4 +10,4 @@ Goals:
 - Inode-based layout
 - C++17 portable
 
-Status: Phase 2 — inode I/O + directory entries
+Status: Phase 5 Completed — Interactive shell & recursive directory operations

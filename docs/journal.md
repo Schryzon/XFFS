@@ -46,9 +46,13 @@ This document records the design decisions, architectural changes, and implement
 - **Checksum Support**:
     - Introduced `compute_checksum` in `utils.hpp` using a simple 64-bit XOR-sum.
     - Updated `inode_io.cpp` to compute and verify inode checksums.
-    - Design pattern: Zero out the `checksum` field, compute the XOR across all 256 bytes, then write the result.## Phase 5: Interactive Shell & Directory Extensions (Completed)
-- **Features**: Implemented `xffs_shell` (REPL environment) with `ls -la`, `mkdir`, `touch`, `write`, `cat`, `stat`, and `rm -r`.
-- **Directory Depth**: Introduced `dir_create` which initialises empty blocks for new directories and wires `.` and `..` immediately upon creation.
-- **Robustness**: Resolved a critical bug where incorrect inode resolution in `dir_create` mistakenly wiped the superblock (block 0). The shell's robust implementation ensures recursive structure deletion (`recursive_rm`) smoothly cleans up the filesystem tree.
+    - Design pattern: Zero out the `checksum` field, compute the XOR across all 256 bytes, then write the result.
     - Failure mode: `read_inode` returns `false` if the computed checksum doesn't match the stored one (for non-free inodes).
+
+---
+
+## Phase 5: Interactive Shell & Directory Extensions (Completed)
+- **Features**: Implemented `xffs_shell` (REPL environment) providing standard filesystem utilities: `ls`, `mkdir`, `touch`, `write`, `cat`, `stat`, and `rm`.
+- **Directory Depth**: Introduced `dir_create`, which initializes empty data blocks for new directories and establishes `.` (self) and `..` (parent) linkages immediately upon creation.
+- **Robustness**: Resolved a critical initialization bug where `dir_create` erroneously targeted block 0 (superblock). The shell now includes `recursive_rm` to safely traverse and deallocate directory trees (inodes and associated data blocks).
 

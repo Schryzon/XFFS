@@ -10,7 +10,7 @@ This project focuses on demonstrating core filesystem concepts such as block man
 
 ---
 
-## ✨ Project Goals
+## Project Goals
 
 * User-space virtual disk filesystem
 * Clear educational design
@@ -21,23 +21,23 @@ This project focuses on demonstrating core filesystem concepts such as block man
 
 ---
 
-## 🧱 Current Features
+## Current Features
 
-* ✔ Superblock layout
-* ✔ Block bitmap initialization
-* ✔ Reserved block marking
-* ✔ Virtual disk formatter (`mkxffs`)
-* ✔ Block allocator (`alloc_block` / `free_block`)
-* ✔ Inode I/O (`read_inode` / `write_inode`) with XOR checksums
-* ✔ Root inode creation on format
-* ✔ Directory entry operations (`dir_init` / `dir_add` / `dir_lookup`)
-* ✔ Path resolution (`/path/to/file`)
-* ✔ Subdirectory support (`dir_create`)
-* ✔ Interactive CLI Shell (`xffs_shell`)
+* Superblock layout and persistent metadata
+* Block bitmap for allocation tracking
+* Metadata block reservation system
+* Virtual disk formatting tool (`mkxffs`)
+* Block allocator and deallocator (`alloc_block` / `free_block`)
+* Inode-based I/O (`read_inode` / `write_inode`) with XOR-sum integrity checks
+* Root inode initialization during filesystem formatting
+* Directory entry management (`dir_init`, `dir_add`, `dir_lookup`)
+* Absolute path resolution (recursive traversal from root `/`)
+* Hierarchical subdirectory support (`dir_create`)
+* Interactive Command Line Interface (CLI) Shell (`xffs_shell`)
 
 ---
 
-## 🛠 Requirements
+## System Requirements
 
 ### Windows
 
@@ -53,7 +53,7 @@ This project focuses on demonstrating core filesystem concepts such as block man
 
 ---
 
-## 🚀 Build Instructions
+## Build Instructions
 
 From the project root:
 
@@ -78,7 +78,7 @@ build/mkxffs
 
 ---
 
-## 💽 Create Virtual Disk
+## Create Virtual Disk Image
 
 ### Windows (PowerShell)
 
@@ -94,7 +94,7 @@ truncate -s 64M xffs.img
 
 ---
 
-## 🧪 Format the Disk
+## Format the Filesystem
 
 ### Windows
 
@@ -118,7 +118,57 @@ xffs formatted successfully
 
 ---
 
-## 🔍 Verify Bitmap (Debug)
+## Interactive Shell
+
+The XFFS Shell provides a REPL interface for managing files and directories on an existing virtual disk image.
+
+### Initiation
+
+#### Windows (PowerShell)
+```powershell
+.\build\Debug\xffs_shell.exe .\xffs.img
+```
+
+#### Linux
+```bash
+./build/xffs_shell ./xffs.img
+```
+
+### Supported Commands
+| Command | Description |
+| :--- | :--- |
+| `ls [-la] <path>` | List directory contents (use `-la` for hidden files/perms) |
+| `mkdir <path>` | Create a new directory |
+| `touch <path>` | Create an empty file |
+| `write <path> "text"`| Write text data to a file |
+| `cat <path>` | Read file contents to stdout |
+| `rm [-r] <path>` | Remove file or directory (use `-r` for recursive) |
+| `stat <path>` | Display detailed inode/checksum information |
+| `help` / `exit` | Show help or quit the shell |
+
+---
+
+## Scripting and Automation
+
+XFFS supports non-interactive execution by piping command lists into the shell, which is useful for testing and automated deployment.
+
+### Windows (PowerShell)
+To avoid Encoding/BOM issues, use a text file:
+```powershell
+# Create a command list
+Set-Content test_script.txt "mkdir /data`ntouch /data/log.txt`nexit"
+# Pipe it
+Get-Content test_script.txt | .\build\Debug\xffs_shell.exe .\xffs.img
+```
+
+### Linux
+```bash
+echo -e "mkdir /data\ntouch /data/log.txt\nexit" | ./build/xffs_shell ./xffs.img
+```
+
+---
+
+## Verify Bitmap Integrity (Debug)
 
 ### Windows
 
@@ -138,7 +188,7 @@ You should see non-zero bytes at the start of block 1 after formatting.
 
 ---
 
-## 📁 Project Structure
+## Project Directory Structure
 
 ```
 xffs/
@@ -152,7 +202,7 @@ xffs/
 
 ---
 
-## 🧭 Roadmap
+## Development Roadmap
 
 ### Phase 1 (current)
 
@@ -177,13 +227,13 @@ xffs/
 
 ---
 
-## 📜 License
+## License
 
 MIT License (recommended for academic projects).
 
 ---
 
-## 👥 Authors
+## Authors and Credits
 
 **XFFS — Xilaizong-Fuxin File System**
 
@@ -191,4 +241,4 @@ Developed as a filesystem learning project.
 
 ---
 
-💙 *Built with curiosity, low-level curiosity, and a bit of chaos.*
+Developed with a focus on low-level systems education and architectural clarity.
